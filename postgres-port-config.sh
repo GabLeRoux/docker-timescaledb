@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-
-set -e
-
+set -ex
+source /docker-entrypoint.sh
 
 if [[ -n "$POSTGRES_PORT" ]]; then
   POSTGRES_CONFIGURATION_FILE=$PGDATA/postgresql.conf
@@ -11,14 +10,13 @@ if [[ -n "$POSTGRES_PORT" ]]; then
   if grep -Fxq "$POSTGRES_CONFIGURATION_MARKER" $POSTGRES_CONFIGURATION_FILE
   then
     # configuration file already written
-    echo "Postgresql port already written, skipping" 
+    echo "Postgresql port already written, skipping"
   else
     # write configuration file
-    su postgres pg_ctl -D "$PGDATA" -m fast -w stop
+    docker_temp_server_stop
     echo "Postgresql configuration port update being written: $POSTGRES_PORT"
     echo "$POSTGRES_CONFIGURATION_MARKER" >> $POSTGRES_CONFIGURATION_FILE
     echo "port = $POSTGRES_PORT" >> $POSTGRES_CONFIGURATION_FILE
-
-    su postgres pg_ctl -D "$PGDATA" -w start
+    docker_temp_server_start
   fi
 fi

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -ex
-source /docker-entrypoint.sh
+source $(which docker-entrypoint.sh)
 
 if [[ -n "$POSTGRES_PORT" ]]; then
   POSTGRES_CONFIGURATION_FILE=$PGDATA/postgresql.conf

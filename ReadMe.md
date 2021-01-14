@@ -30,7 +30,7 @@ definitions:
         POSTGRES_USER: example
         POSTGRES_PASSWORD: example_password
     timescaledb:
-      image: gableroux/timescaledb:latest-pg11
+      image: gableroux/timescaledb:latest-pg12
       environment:
         POSTGRES_DB: example
         POSTGRES_USER: example
@@ -51,6 +51,22 @@ pipelines:
     develop:
       - parallel:
         - step: *run-nmap
+```
+
+## build your own
+
+1. list existing upstream image tags (you'll need `jq` installed)
+
+```bash
+./scripts/list-upstream-tags.sh
+```
+
+2. Build and publish your own
+
+```bash
+tag=latest-pg12
+organization=gableroux
+./scripts/build.sh $tag $organization
 ```
 
 ## License

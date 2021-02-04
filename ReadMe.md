@@ -8,6 +8,8 @@
 [![Version](https://images.microbadger.com/badges/version/gableroux/timescaledb.svg)](https://microbadger.com/images/gableroux/timescaledb)
 [![Layers](https://images.microbadger.com/badges/image/gableroux/timescaledb.svg)](https://microbadger.com/images/gableroux/timescaledb)
 
+# ⚠️ You can use `$PGPORT` instead of `$POSTGRES_PORT` in `timescale/timescaledb` since `postgres` [added support here](https://github.com/docker-library/postgres/commit/89a2fb84e6ec42ecc04e195252e405c52ecd3a96) so don't use these images. 🎉
+
 Timescaledb image with support for setting database port using `$POSTGRES_PORT` environment variable. Inspired by [following issue comment](https://github.com/docker-library/postgres/issues/196#issuecomment-252328796).
 
 Issue was closed because they say all major CIs implements the `command` which also allows overriding the port. Well as of today (2020-09-21), Bitbucket Pipeline doesn't support that.
